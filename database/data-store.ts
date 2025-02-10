@@ -1,5 +1,6 @@
 import {PrismaClient} from "@prisma/client";
 import Customer from "../models/Customer";
+import Item from "../models/Item";
 
 const prisma = new PrismaClient()
 
@@ -65,6 +66,66 @@ export async function CustomerGetAll(){
         return await prisma.customer.findMany()
     }
     catch(err){
+        console.log(err)
+    }
+}
+//Item Ops
+
+export async function ItemAdd(i:Item){
+    try {
+        const addItem = await prisma.item.create({
+            data:{
+                itemCode:i.itemCode,
+                desc:i.desc,
+                author:i.author,
+                qto:i.qto,
+                price:i.price
+            }
+        });
+        console.log("Item added successfully")
+    }catch (err){
+        console.log(err)
+    }
+}
+export async function ItemDelete(id:string){
+    try {
+        await prisma.item.delete({
+            where:{itemCode:id}
+        })
+    }catch(err){
+        console.log(err)
+    }
+}
+export async function ItemUpdate(id:string,i:Item){
+    try {
+        await prisma.item.update({
+            where:{
+                itemCode:id
+            },
+            data:{
+                itemCode:i.itemCode,
+                desc:i.desc,
+                author:i.author,
+                qto:i.qto,
+                price:i.price
+            }
+        })
+    }catch (err){
+        console.log(err)
+    }
+}
+export async function ItemGetById(id:string){
+    try{
+        return await prisma.item.findUnique({where:{itemCode:String(id)},})
+
+    }catch (err){
+        console.log(err)
+    }
+}
+export async function ItemGetAll(){
+    try {
+        return await prisma.item.findMany()
+    }catch (err){
         console.log(err)
     }
 }
