@@ -1,0 +1,33 @@
+{
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "prisma": "^6.3.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "name": "react_assignment_backend",
+  "version": "1.0.0",
+  "description": "Backend for react assignment ",
+  "main": "server.ts",
+  "dependencies": {
+    "@prisma/client": "^6.3.1",
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.0",
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "esbuild": "^0.23.1",
+    "express": "^4.21.2",
+    "get-tsconfig": "^4.10.0",
+    "resolve-pkg-maps": "^1.0.0",
+    "undici-types": "^6.20.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.ts"
+  },
+  "author": "Buddhika Pathum",
+  "license": "MIT"
+}
