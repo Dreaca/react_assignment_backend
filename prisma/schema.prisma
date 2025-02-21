@@ -43,7 +43,7 @@ model Orders {
 model OrderDetails {
   orderId  String
   itemCode String
-  orders   Orders @relation(fields: [orderId], references: [orderId])
+  orders   Orders @relation(fields: [orderId], references: [orderId], onDelete: Cascade)
   Item     Item   @relation(fields: [itemCode], references: [itemCode])
 
   @@id([itemCode, orderId])

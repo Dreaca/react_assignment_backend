@@ -162,3 +162,20 @@ export async function OrderAdd(o:Order){
         console.log(err)
     }
 }
+export async function OrderDelete(id:string){
+    try {
+        await prisma.orders.delete({
+            where:{orderId:String(id)},
+        })
+        console.log("Item deleted successfully")
+    }catch (err){
+        console.log(err)
+    }
+}
+export async function OrderGetAll(){
+    try {
+        return await prisma.orders.findMany()
+    }catch (err){
+        console.log("Error loading orders")
+    }
+}
