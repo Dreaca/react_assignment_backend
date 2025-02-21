@@ -1,6 +1,7 @@
 import {PrismaClient} from "@prisma/client";
 import Customer from "../models/Customer";
 import Item from "../models/Item";
+import Order from "../models/Order";
 
 const prisma = new PrismaClient()
 
@@ -126,6 +127,38 @@ export async function ItemGetAll(){
     try {
         return await prisma.item.findMany()
     }catch (err){
+        console.log(err)
+    }
+}
+//Order Ops
+export async function OrderAdd(o:Order){
+    try {
+        await prisma.$transaction(async (prisma)=>{
+            const addOrder = await prisma.orders.create({
+                data:{
+                    orderId : o.orderId,
+                    customerId : o.customerId,
+                    date: o.date,
+                    customerName:o.customerName,
+                    total:o.total,
+                    discount:o.discount,
+                    subtotal:o.subtotal,
+                    orderDetails:{
+                        create: o.orderDetails.map(detail =>({
+                            itemCode:detail.itemCode,
+                        }))
+                    }
+                }
+            });
+            await Promise.all(
+                o.orderDetails.map(detail=>prisma.item.update({
+                    where:{itemCode:detail.itemCode},
+                    data:{qto:{decrement:detail.quantity}}
+                }))
+            )
+        })
+        console.log("Order added successfully")
+    }catch(err){
         console.log(err)
     }
 }

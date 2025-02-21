@@ -32,11 +32,11 @@ model Item {
 model Orders {
   orderId      String         @id
   customerId   String
-  date         DateTime
+  date         String
   customerName String
   total        Float
   discount     String
-  subTotal     Float
+  subtotal     Float
   orderDetails OrderDetails[]
 }
 
