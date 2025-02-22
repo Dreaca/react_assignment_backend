@@ -167,7 +167,7 @@ export async function OrderDelete(id:string){
         await prisma.orders.delete({
             where:{orderId:String(id)},
         })
-        console.log("Item deleted successfully")
+        console.log("Order deleted successfully")
     }catch (err){
         console.log(err)
     }

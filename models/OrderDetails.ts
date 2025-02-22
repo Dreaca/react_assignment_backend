@@ -1,4 +1,9 @@
 export default class OrderDetails {
-    itemCode!: string;
-    quantity!: number;
+    constructor(itemCode: string, qty: number) {
+        this.itemCode = itemCode;
+        this.quantity = qty;
+    }
+
+    itemCode: string;
+    quantity: number;
 }
