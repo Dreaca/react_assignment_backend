@@ -2,6 +2,8 @@ import {PrismaClient} from "@prisma/client";
 import Customer from "../models/Customer";
 import Item from "../models/Item";
 import Order from "../models/Order";
+import {User} from "../models/User";
+import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient()
 
@@ -178,4 +180,27 @@ export async function OrderGetAll(){
     }catch (err){
         console.log("Error loading orders")
     }
+}
+//User Ops
+export async function verifyUserCredentials(verifyUser: User) {
+    const user : User | null = await prisma.user.findUnique({
+        where: { username: verifyUser.username },
+    });
+    if (!user) {
+        return false;
+    }
+
+    return await bcrypt.compare(verifyUser.password, user.password);
+}
+
+export async function createUser(user : User) {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+
+    const addedUser = await prisma.user.create({
+        data: {
+            username : user.username,
+            password : hashedPassword,
+        },
+    });
+    console.log("User created:", addedUser);
 }

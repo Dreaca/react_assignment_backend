@@ -4,6 +4,7 @@ import cors from 'cors'
 import customerRoutes from "./routes/customer-routes";
 import itemRoutes from "./routes/item-routes";
 import orderRoutes from "./routes/order-routes";
+import authRoutes, {authenticateToken} from "./routes/auth-routes";
 
 
 const app = express();
@@ -16,6 +17,9 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }))
+app.use('/auth',authRoutes)
+app.use(authenticateToken)
+
 app.use('/customer',customerRoutes)
 
 app.use('/item',itemRoutes)

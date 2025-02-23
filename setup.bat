@@ -37,6 +37,11 @@ npm i @prisma/client
 REM generate prisma schema
 npx i prisma generate
 
+REM Install jwt for auth
+
+npm i jsonwebtoken
+npm i @types/jsonwebtoken
+
 REM push your models in schema to the database
 REM npx prisma db push
 
