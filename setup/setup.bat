@@ -35,7 +35,7 @@ REM install prisma client
 npm i @prisma/client
 
 REM generate prisma schema
-npx i prisma generate
+npx prisma generate
 
 REM Install jwt for auth
 
